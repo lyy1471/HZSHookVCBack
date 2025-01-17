@@ -68,9 +68,14 @@
     if (topViewController.hzs_interactivePopDisabled) {
         return NO;
     }
-    //  手势滑动距左边框的距离超过maxAllowedInitialDistance 手势不执行。
+    //  手势滑动距左边框的距离超过maxAllowedInitialDistance 手势不执行。 
     CGPoint beginningLocation = [gestureRecognizer locationInView:gestureRecognizer.view];
-    CGFloat maxAllowedInitialDistance = topViewController.hzs_interactiveDistanceToLeftEdge;
+    
+//    CGFloat maxAllowedInitialDistance = topViewController.hzs_interactiveDistanceToLeftEdge;
+    CGFloat maxAllowedInitialDistance = topViewController.hzs_interactiveDistanceToLeftEdge > 0
+        ? topViewController.hzs_interactiveDistanceToLeftEdge
+        : 70; // 默认左侧触发范围为 50pt
+        
     if (maxAllowedInitialDistance > 0 && beginningLocation.x > maxAllowedInitialDistance) {
         return NO;
     }
